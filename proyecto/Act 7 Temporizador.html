@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador de Cuenta Atrás</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e2f;
+            margin: 0;
+            color: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 80px;
+            margin: 0;
+            letter-spacing: 2px;
+            color: #ff4081;
+            transition: color 0.3s ease-in-out;
+        }
+
+        button {
+            background-color: #ff4081;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff5c8d;
+        }
+
+        button:active {
+            background-color: #d9346e;
+        }
+
+        /* Animación de destello al finalizar */
+        .blink {
+            animation: blink 1s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            50% { color: #fff; }
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="temporizador">50</h1>
+    <button onclick="iniciarTemporizador()">Iniciar Temporizador</button>
+
+    <script>
+        var contador = 50;
+        var intervalo;
+
+        function iniciarTemporizador() {
+            if (!intervalo) { // Evita que se inicien múltiples intervalos
+                intervalo = setInterval(function() {
+                    if (contador > 0) {
+                        contador--;
+                        document.getElementById('temporizador').textContent = contador;
+                    } else {
+                        clearInterval(intervalo); // Detiene el temporizador cuando llega a 0
+                        document.getElementById('temporizador').classList.add('blink');
+                        alert("¡El tiempo ha terminado!");
+                    }
+                }, 1000); // 1000 ms = 1 segundo
+            }
+        }
+    </script>
+</body>
+</html>

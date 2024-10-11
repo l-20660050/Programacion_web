@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Interactivo</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: #f0f0f0;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #61dafb;
+        }
+
+        .contador {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para los botones */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #61dafb;
+            color: #282c34;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+
+        button:active {
+            background-color: #1a82c4;
+        }
+
+        /* Animación para el contador */
+        .contador span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .contador span.scale-up {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Contador Interactivo</h2>
+
+    <p class="contador">Valor actual: <span id="contador">0</span></p>
+
+    <button id="subirparriba">Aumentar</button>
+    <button id="bajarpabajo">Disminuir</button>
+
+    <script>
+        // Variable para almacenar el valor del contador
+        let contador = 0;
+
+        // Asignar los botones a variables
+        const subirparriba = document.getElementById('subirparriba');
+        const bajarpabajo = document.getElementById('bajarpabajo');
+        const contadorSpan = document.getElementById('contador');
+
+        // Función para actualizar el valor mostrado del contador
+        function actualizarContador() {
+            contadorSpan.innerText = contador;
+
+            // Animación de escala para el contador
+            contadorSpan.classList.add('scale-up');
+            setTimeout(() => contadorSpan.classList.remove('scale-up'), 200);
+        }
+
+        // Event Listener para aumentar el contador
+        subirparriba.addEventListener('click', function() {
+            contador++;
+            actualizarContador();
+        });
+
+        // Event Listener para disminuir el contador
+        bajarpabajo.addEventListener('click', function() {
+            contador--;
+            actualizarContador();
+        });
+    </script>
+
+</body>
+</html>

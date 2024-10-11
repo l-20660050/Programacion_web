@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtro de Búsqueda en Tabla</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: rgb(194, 171, 237);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4A90E2;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos del input de búsqueda */
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 8px 16px rgba(74, 144, 226, 0.2);
+            outline: none;
+        }
+
+        /* Estilos de la tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4A90E2;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        /* Media queries para responsive design */
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Filtro de Búsqueda en Tabla</h2>
+<input type="text" id="buscarInput" onkeyup="filtrarTabla()" placeholder="Buscar por nombres...">
+
+<table id="miTabla">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Carlos Gómez</td>
+            <td>25</td>
+            <td>Madrid</td>
+        </tr>
+        <tr>
+            <td>Laura Sánchez</td>
+            <td>30</td>
+            <td>Barcelona</td>
+        </tr>
+        <tr>
+            <td>Juan Pérez</td>
+            <td>28</td>
+            <td>Valencia</td>
+        </tr>
+        <tr>
+            <td>María López</td>
+            <td>22</td>
+            <td>Sevilla</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+function filtrarTabla() {
+    const input = document.getElementById("buscarInput");
+    const filtro = input.value.toLowerCase();
+    const tabla = document.getElementById("miTabla");
+    const tr = tabla.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {
+        let visible = false;
+        const td = tr[i].getElementsByTagName("td");
+        for (let j = 0; j < td.length; j++) {
+            if (td[j]) {
+                const texto = td[j].textContent || td[j].innerText;
+                if (texto.toLowerCase().indexOf(filtro) > -1) {
+                    visible = true;
+                }
+            }
+        }
+        tr[i].style.display = visible ? "" : "none";
+    }
+}
+</script>
+
+</body>
+</html>

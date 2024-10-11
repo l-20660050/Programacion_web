@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de Imagen con JS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e90ff, #ff7f50);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .image-container {
+            width: 350px;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+        }
+
+        #mainImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: opacity 0.5s ease;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #e5533d;
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Cambia la imagen</h1>
+    <div class="image-container">
+        <img src="Taza de cafe.jpeg" alt="Imagen 1" id="mainImage">
+    </div>
+    <button id="changeImageButton">Cambiar Imagen</button>
+
+    <script>
+        // Selecciona el elemento de la imagen principal
+        const mainImage = document.getElementById('mainImage');
+
+        // Define las rutas de las imágenes
+        const images = ['Taza de cafe.jpeg', 'belico.jpeg'];
+
+        // Variable para llevar el seguimiento de la imagen actual
+        let currentImageIndex = 0;
+
+        // Selecciona el botón
+        const changeImageButton = document.getElementById('changeImageButton');
+
+        // Agrega un evento al botón para cambiar la imagen cuando se hace clic
+        changeImageButton.addEventListener('click', () => {
+            // Aplicar un efecto de desvanecimiento
+            mainImage.style.opacity = 0;
+
+            setTimeout(() => {
+                // Alterna entre las imágenes
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                mainImage.src = images[currentImageIndex];
+                // Vuelve a mostrar la imagen después de cambiar
+                mainImage.style.opacity = 1;
+            }, 500);
+        });
+    </script>
+</body>
+</html>
