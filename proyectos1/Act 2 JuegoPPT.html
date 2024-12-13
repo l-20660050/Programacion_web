@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijeras</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            background-color: rgba(111, 233, 255, 0.922);
+        }
+
+        h1 {
+            color: #4A90E2;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        /* Estilos para los botones */
+        button {
+            font-size: 18px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            background-color: #4A90E2;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* Estilo del resultado */
+        #resultado {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #E94E77; /* Color para el resultado */
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(233, 78, 119, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Piedra, Papel o Tijeras</h1>
+    <p>Selecciona tu jugada:</p>
+    <button onclick="jugar('Piedra')">Piedra</button>
+    <button onclick="jugar('Papel')">Papel</button>
+    <button onclick="jugar('Tijeras')">Tijeras</button>
+    <p id="resultado"></p>
+
+    <script>
+        function jugar(eleccionUsuario) {
+            const opciones = ['Piedra', 'Papel', 'Tijeras'];
+            const eleccionComputadora = opciones[Math.floor(Math.random() * opciones.length)];
+
+            let resultado = '';
+
+            if (eleccionUsuario === eleccionComputadora) {
+                resultado = 'Es un empate. Ambos eligieron ' + eleccionUsuario;
+            } else if (
+                (eleccionUsuario === 'Piedra' && eleccionComputadora === 'Tijeras') ||
+                (eleccionUsuario === 'Papel' && eleccionComputadora === 'Piedra') ||
+                (eleccionUsuario === 'Tijeras' && eleccionComputadora === 'Papel')
+            ) {
+                resultado = '¡Ganaste! ' + eleccionUsuario + ' vence a ' + eleccionComputadora;
+            } else {
+                resultado = 'Perdiste. ' + eleccionComputadora + ' vence a ' + eleccionUsuario;
+            }
+
+            document.getElementById('resultado').textContent = resultado;
+        }
+    </script>
+</body>
+</html>

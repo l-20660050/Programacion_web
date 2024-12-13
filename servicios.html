@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Mi Portafolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navegación (igual que en index.html) -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">MiPortafolio</a>
+        </div>
+        <div class="menu-icon" id="menu-icon">
+            &#9776;
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html" class="active">Servicios</a></li>
+            <li><a href="sobre-mi.html">Sobre Mi</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main>
+        <section class="services">
+            <h2>Servicios</h2>
+            <p>Ofrecemos una amplia gama de servicios para ayudarte a alcanzar tus objetivos.</p>
+
+            <!-- Contenedor de Servicios -->
+            <div class="gallery-container">
+                <!-- Servicio 1 -->
+                <div class="gallery-item">
+                    <img src="images1/Desarrollo web.png" alt="Desarrollo Web">
+                    <div class="overlay">
+                        <div class="overlay-text">Desarrollo Web</div>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="gallery-item">
+                    <img src="images1/el marketing digital.jpg" alt="Marketing Digital">
+                    <div class="overlay">
+                        <div class="overlay-text">Marketing Digital</div>   
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="gallery-item">
+                    <img src="images1/SEO.jpg" alt="Optimización SEO">
+                    <div class="overlay">
+                        <div class="overlay-text">Optimización SEO</div>   
+                    </div>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="gallery-item">
+                    <img src="images1/diseño grafico.jpg" alt="Diseño Gráfico">
+                    <div class="overlay">
+                        <div class="overlay-text">Diseño Gráfico</div>                       
+                    </div>
+                </div>
+
+                <!-- Puedes añadir más servicios siguiendo el mismo patrón -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modales de Servicios -->
+
+    <!-- Modal 1: Desarrollo Web -->
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Desarrollo Web</h2>
+            <p>Ofrecemos servicios completos de desarrollo web, desde la creación de sitios estáticos hasta aplicaciones web dinámicas y complejas. Utilizamos las últimas tecnologías para garantizar que tu sitio sea rápido, seguro y escalable.</p>
+            <!-- Puedes añadir más contenido, imágenes o enlaces según sea necesario -->
+        </div>
+    </div>
+
+    <!-- Modal 2: Marketing Digital -->
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Marketing Digital</h2>
+            <p>Nuestro equipo de expertos en marketing digital te ayudará a aumentar la visibilidad de tu negocio en línea. Implementamos estrategias efectivas de publicidad en redes sociales, campañas de email marketing y marketing de contenidos para atraer y retener a tu audiencia.</p>
+        </div>
+    </div>
+
+    <!-- Modal 3: Optimización SEO -->
+    <div class="modal" id="modal3">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Optimización SEO</h2>
+            <p>Mejora el posicionamiento de tu sitio web en los motores de búsqueda con nuestras estrategias de SEO personalizadas. Realizamos análisis de palabras clave, optimización on-page y off-page, y creación de enlaces de calidad para aumentar tu tráfico orgánico.</p>
+        </div>
+    </div>
+
+    <!-- Modal 4: Diseño Gráfico -->
+    <div class="modal" id="modal4">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Diseño Gráfico</h2>
+            <p>Creación de diseños visuales atractivos y profesionales para tu marca. Diseñamos logotipos, material promocional, infografías y más, asegurando que tu identidad visual destaque y comunique eficazmente tu mensaje.</p>
+        </div>
+    </div>
+
+    <!-- Puedes añadir más modales para otros servicios -->
+
+    <script src="script.js"></script>
+</body>
+</html>

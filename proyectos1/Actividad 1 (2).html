@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Imágenes - Unsplash API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: rgb(127, 229, 255);
+    }   
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .gallery img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      background-color: rgb(0, 94, 255);
+      padding: 30px;
+      border-radius: 5%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galería de Imágenes Aleatorias</h1>
+  <button id="loadImages">Cargar nuevas imágenes</button>
+  <div class="gallery" id="gallery"></div>
+
+  <script>
+    const accessKey = 'm4ZgzE0He15U1XJwP6bUcWOxnkFWqPKaklDOsJxWSDQ'; // Reemplaza con tu Access Key de Unsplash
+
+document.getElementById('loadImages').addEventListener('click', fetchImages);
+
+function fetchImages() {
+  const url = `https://api.unsplash.com/photos/random?count=6&client_id=${accessKey}`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = ''; // Limpiar la galería
+
+      data.forEach(photo => {
+        const imgElement = document.createElement('img');
+        imgElement.src = photo.urls.small;
+        gallery.appendChild(imgElement);
+      });
+    })
+    .catch(error => console.error('Error al obtener imágenes:', error));
+}
+
+  </script>
+</body>
+</html>

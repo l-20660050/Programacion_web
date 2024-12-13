@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas (To-Do List)</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkTyxFBN1vDBQR6tFXN3jDZ1J9GthlvwjY1dGQjI2oPj8nOWI4nWgg/MRIBwjP0f0c2TllwM19C3KzUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Variables de CSS para facilitar la personalización */
+        :root {
+            --color-fondo: #f0f2f5;
+            --color-primario: #4CAF50;
+            --color-secundario: #ffffff;
+            --color-error: #e74c3c;
+            --color-completado: #d3ffd3;
+            --fuente-principal: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: var(--fuente-principal);
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: var(--color-secundario);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-primario);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .input-group input[type="text"] {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input[type="text"]:focus {
+            border-color: var(--color-primario);
+        }
+
+        .input-group button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: var(--color-primario);
+            color: var(--color-secundario);
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-group button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+        }
+
+        li.completada {
+            text-decoration: line-through;
+            background-color: var(--color-completado);
+            color: #555;
+            opacity: 0.8;
+        }
+
+        li .tarea-texto {
+            flex: 1;
+            text-align: left;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        li button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 18px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        li button.completar {
+            color: var(--color-primario);
+        }
+
+        li button.completar:hover {
+            color: #388e3c;
+            transform: scale(1.2);
+        }
+
+        li button.eliminar {
+            color: var(--color-error);
+        }
+
+        li button.eliminar:hover {
+            color: #c0392b;
+            transform: scale(1.2);
+        }
+
+        #mensaje {
+            display: none;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: var(--color-error);
+            animation: fadeInOut 3s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Scroll personalizado */
+        ul::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ul::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        ul::-webkit-scrollbar-thumb:hover {
+            background-color: #aaa;
+        }
+
+        /* Responsividad */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .input-group input[type="text"], .input-group button {
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            li .tarea-texto {
+                font-size: 14px;
+            }
+
+            li button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lista de Tareas</h1>
+
+        <div class="input-group">
+            <input type="text" id="nuevaTarea" placeholder="Escribe una nueva tarea">
+            <button onclick="agregarTarea()" title="Agregar Tarea">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <span id="mensaje">Por favor, introduce una tarea válida.</span>
+
+        <ul id="listaTareas"></ul>
+    </div>
+
+    <script>
+        // Array para almacenar las tareas
+        let tareas = [];
+
+        // Obtener elementos del DOM
+        const formInput = document.getElementById('nuevaTarea');
+        const lista = document.getElementById('listaTareas');
+        const mensaje = document.getElementById('mensaje');
+
+        // Función para agregar una tarea
+        function agregarTarea() {
+            const tareaTexto = formInput.value.trim();
+
+            if (tareaTexto !== "") {
+                tareas.push({ texto: tareaTexto, completada: false });
+                actualizarLista();
+                formInput.value = "";
+                formInput.focus();
+            } else {
+                mostrarMensaje("Por favor, introduce una tarea válida.");
+            }
+        }
+
+        // Función para actualizar la lista en el DOM
+        function actualizarLista() {
+            lista.innerHTML = "";
+
+            tareas.forEach((tarea, indice) => {
+                const li = document.createElement('li');
+                if (tarea.completada) {
+                    li.classList.add('completada');
+                }
+
+                // Texto de la tarea
+                const span = document.createElement('span');
+                span.classList.add('tarea-texto');
+                span.textContent = tarea.texto;
+                li.appendChild(span);
+
+                // Botón para completar
+                const botonCompletar = document.createElement('button');
+                botonCompletar.classList.add('completar');
+                botonCompletar.innerHTML = tarea.completada ? '<i class="fas fa-undo"></i>' : '<i class="fas fa-check"></i>';
+                botonCompletar.title = tarea.completada ? 'Desmarcar como completada' : 'Marcar como completada';
+                botonCompletar.onclick = () => marcarComoCompletada(indice);
+                li.appendChild(botonCompletar);
+
+                // Botón para eliminar
+                const botonEliminar = document.createElement('button');
+                botonEliminar.classList.add('eliminar');
+                botonEliminar.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                botonEliminar.title = 'Eliminar tarea';
+                botonEliminar.onclick = () => eliminarTarea(indice);
+                li.appendChild(botonEliminar);
+
+                lista.appendChild(li);
+            });
+        }
+
+        // Función para marcar o desmarcar una tarea como completada
+        function marcarComoCompletada(indice) {
+            tareas[indice].completada = !tareas[indice].completada;
+            actualizarLista();
+        }
+
+        // Función para eliminar una tarea
+        function eliminarTarea(indice) {
+            tareas.splice(indice, 1);
+            actualizarLista();
+        }
+
+        // Función para mostrar mensajes estilizados
+        function mostrarMensaje(texto) {
+            mensaje.textContent = texto;
+            mensaje.style.display = 'block';
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                mensaje.style.display = 'none';
+            }, 3000);
+        }
+
+        // Evento para agregar tarea al presionar "Enter"
+        formInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                agregarTarea();
+            }
+        });
+
+        // Focus automático en el campo de entrada al cargar la página
+        window.onload = function() {
+            formInput.focus();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Convertidor de Unidades</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #b584e3, #cbb0ed);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Contenedor principal */
+    .converter {
+      background: #c4edff;
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .converter:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Título */
+    .converter h2 {
+      margin-bottom: 20px;
+      color: #333333;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
+
+    /* Estilos para los inputs y selects */
+    .converter input, .converter select {
+      margin: 15px 0;
+      padding: 14px 18px;
+      width: 100%;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      font-size: 1em;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      background: #f7f9fc;
+    }
+
+    .converter input:focus, .converter select:focus {
+      border-color: #0056b3;
+      box-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+    }
+
+    /* Botón de conversión */
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      width: 100%;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    /* Resultado */
+    #result {
+      margin-top: 25px;
+      font-size: 1.6em;
+      color: #007BFF;
+      font-weight: bold;
+      min-height: 1.6em;
+      transition: color 0.3s ease;
+    }
+
+    /* Animación para el resultado */
+    #result.show {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Medidas responsivas */
+    @media (max-width: 400px) {
+      .converter {
+        padding: 30px 35px;
+      }
+
+      .converter h2 {
+        font-size: 1.7em;
+      }
+
+      #result {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h2>Convertidor de Unidades</h2>
+    <input type="number" id="inputValue" placeholder="Ingresa el valor" min="0" step="any">
+    
+    <select id="inputUnit">
+      <option value="meters">Metros</option>
+      <option value="kilometers">Kilómetros</option>
+      <option value="miles">Millas</option>
+    </select>
+
+    <select id="outputUnit">
+      <option value="meters">Metros</option>
+      <option value="kilometers">Kilómetros</option>
+      <option value="miles">Millas</option>
+    </select>
+
+    <button onclick="convertUnits()">Convertir</button>
+
+    <div id="result">Resultado: 0</div>
+  </div>
+
+  <script>
+    // Elementos del DOM
+    const inputValue = document.getElementById('inputValue');
+    const inputUnit = document.getElementById('inputUnit');
+    const outputUnit = document.getElementById('outputUnit');
+    const result = document.getElementById('result');
+
+    // Tasas de conversión
+    const conversionRates = {
+      meters: {
+        meters: 1,
+        kilometers: 0.001,
+        miles: 0.000621371,
+      },
+      kilometers: {
+        meters: 1000,
+        kilometers: 1,
+        miles: 0.621371,
+      },
+      miles: {
+        meters: 1609.34,
+        kilometers: 1.60934,
+        miles: 1,
+      },
+    };
+
+    // Función de conversión
+    function convertUnits() {
+      const inputVal = parseFloat(inputValue.value) || 0;
+      const fromUnit = inputUnit.value;
+      const toUnit = outputUnit.value;
+      
+      const conversionRate = conversionRates[fromUnit][toUnit];
+      const convertedValue = inputVal * conversionRate;
+
+      result.textContent = `Resultado: ${convertedValue.toFixed(4)}`;
+      result.classList.add('show');
+      setTimeout(() => {
+        result.classList.remove('show');
+      }, 500);
+    }
+
+    // Eventos para conversión en tiempo real
+    inputValue.addEventListener('input', convertUnits);
+    inputUnit.addEventListener('change', convertUnits);
+    outputUnit.addEventListener('change', convertUnits);
+  </script>
+</body>
+</html>
