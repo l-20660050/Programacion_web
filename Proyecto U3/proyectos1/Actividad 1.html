@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje en Carga</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff6b6b, #f3a683);
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        #soyelid {
+            font-size: 2em;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.6s ease-in-out;
+            text-align: center;
+        }
+
+        #soyelid.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <script>
+        // Función para mostrar el mensaje después de cargar la página con un efecto de transición
+        window.onload = function() {
+            const mensaje = document.getElementById("soyelid");
+            mensaje.textContent = "No me gusta la programación";
+            mensaje.classList.add("show");
+        }
+    </script>
+</head>
+<body>
+    <p id="soyelid"></p> <!-- El mensaje se mostrará aquí después de que la página haya cargado -->
+</body>
+</html>
+

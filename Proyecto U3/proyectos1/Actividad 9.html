@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro</title>
+    <link rel="stylesheet">
+</head>
+<body>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1f4037, #99f2c8);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: #fff;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 430px;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.time-display {
+    font-size: 64px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.btn {
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.start {
+    background-color: #28a745;
+}
+
+.pause {
+    background-color: #ffc107;
+}
+
+.reset {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(2px);
+}
+
+
+    </style>
+    <div class="container">
+        <h1>Cronómetro</h1>
+        <div class="time-display" id="time">00:00:00</div>
+        <div class="buttons">
+            <button id="start" class="btn start">Iniciar</button>
+            <button id="pause" class="btn pause">Pausar</button>
+            <button id="reset" class="btn reset">Reiniciar</button>
+        </div>
+    </div>
+
+    <script>
+        let seconds = 0, minutes = 0, hours = 0;
+let interval = null;
+let isRunning = false;
+
+// Actualiza el tiempo mostrado
+function updateTime() {
+    seconds++;
+
+    if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+    }
+
+    if (minutes === 60) {
+        minutes = 0;
+        hours++;
+    }
+
+    let formattedTime = 
+        (hours < 10 ? "0" + hours : hours) + ":" +
+        (minutes < 10 ? "0" + minutes : minutes) + ":" +
+        (seconds < 10 ? "0" + seconds : seconds);
+
+    document.getElementById("time").innerText = formattedTime;
+}
+
+// Iniciar cronómetro
+document.getElementById("start").addEventListener("click", function() {
+    if (!isRunning) {
+        interval = setInterval(updateTime, 1000);
+        isRunning = true;
+    }
+});
+
+// Pausar cronómetro
+document.getElementById("pause").addEventListener("click", function() {
+    clearInterval(interval);
+    isRunning = false;
+});
+
+// Reiniciar cronómetro
+document.getElementById("reset").addEventListener("click", function() {
+    clearInterval(interval);
+    isRunning = false;
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    document.getElementById("time").innerText = "00:00:00";
+});
+
+    </script>
+</body>
+</html>

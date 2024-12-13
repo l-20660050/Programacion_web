@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar color de fondo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background-color: rgb(150, 149, 149);
+        }
+        #soyelid {
+            font-size: 24px;
+            color: black;
+        }
+        #changeColorBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: lightgray;
+            border-radius:10px ;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="soyelid">Cambio de color</p>
+    <button id="changeColorBtn">Cambiar color de fondo</button>
+
+    <script>
+        // Arreglo de colores
+        const colores = ['#FF5733', '#33FF57', '#3357FF', '#FF33A5', '#A533FF'];
+
+        // Obtener el botón del DOM
+        const botonCambiarColor = document.getElementById('changeColorBtn');
+
+        // Asignar un evento 'click' al botón
+        botonCambiarColor.addEventListener('click', function() {
+            // Generar un color aleatorio del arreglo de colores
+            let colorAleatorio = '';
+            
+            // Ciclo for para seleccionar un color aleatorio del arreglo
+            for (let i = 0; i < colores.length; i++) {
+                let indiceAleatorio = Math.floor(Math.random() * colores.length);
+                colorAleatorio = colores[indiceAleatorio];
+            }
+
+            // Cambiar el color de fondo de la página
+            document.body.style.backgroundColor = colorAleatorio;
+        });
+    </script>
+
+</body>
+</html>

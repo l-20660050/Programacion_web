@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Formulario</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #357ABD;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #noname {
+            color: #e74c3c;
+            display: none; /* Ocultamos el mensaje por defecto */
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Estilo para el botón de alerta */
+        .alert-button {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Formulario de Registro</h2>
+        <form id="registerForm" action="#" method="POST">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" placeholder="Introduce tu nombre">
+
+            <span id="noname">Por favor, introduce tu nombre.</span>
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+    <script>
+        // Obtener el formulario y los elementos relevantes
+        const form = document.getElementById('registerForm');
+        const nameInput = document.getElementById('name');
+        const noNameMessage = document.getElementById('noname');
+
+        // Añadir un evento de escucha para la validación antes de enviar el formulario
+        form.addEventListener('submit', function(event) {
+            // Evitar que el formulario se envíe si el campo de nombre está vacío
+            if (nameInput.value.trim() === '') {
+                // Mostrar el mensaje de error en color rosa
+                noNameMessage.style.display = 'block';
+                // Mostrar una alerta de error
+                alert('Error: Por favor, introduce tu nombre.');
+                // Prevenir el envío del formulario
+                event.preventDefault();
+            } else {
+                // Ocultar el mensaje si el campo de nombre está lleno
+                noNameMessage.style.display = 'none';
+                // Mostrar una alerta de éxito
+                alert('¡Registro exitoso!');
+            }
+        });
+    </script>
+
+</body>
+</html>

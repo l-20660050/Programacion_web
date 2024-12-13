@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suma de dos Números</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #3671af;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulario: Suma de dos Números</h2>
+        
+        <form id="sumaForm">
+            <label for="churpia1">Primer Número:</label>
+            <input type="number" id="churpia1" name="churpia1" placeholder="Ingresa el primer número"><br>
+            
+            <label for="churpia2">Segundo Número:</label>
+            <input type="number" id="churpia2" name="churpia2" placeholder="Ingresa el segundo número"><br>
+            
+            <button type="button" onclick="sumar()">Calcular Suma</button>
+        </form>
+
+        <h3>Resultado:</h3>
+        <p id="caquita">El resultado aparecerá aquí</p>
+    </div>
+
+    <script>
+        function sumar() {
+            let churpia1 = parseFloat(document.getElementById('churpia1').value);
+            let churpia2 = parseFloat(document.getElementById('churpia2').value);
+            
+            if (!isNaN(churpia1) && !isNaN(churpia2)) {
+                let caquita = churpia1 + churpia2;
+                document.getElementById('caquita').innerText = "La suma es: " + caquita;
+            } else {
+                document.getElementById('caquita').innerText = "Por favor ingresa ambos números.";
+                document.getElementById('caquita').classList.add('error');
+            }
+        }
+    </script>
+
+</body>
+</html>
